@@ -1,0 +1,17 @@
+name: generate openapi updates
+on:
+  push: 
+
+jobs:
+  generate-client:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v3
+      - name: npm install generators
+        run: npm install @openapitools/openapi-generator-cli
+      - name: generate api for petstore
+        run: |
+        npx openapi-generator-cli generate -i https://petstore3.swagger.io/api/v3/openapi.json \
+        -g typescript-axios -o <location of output> \
+        --additional-properties=supportsES6=true,withNodeImports=true,withInterfaces=true
