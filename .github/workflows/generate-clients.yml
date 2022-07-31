@@ -25,3 +25,6 @@ jobs:
           npx openapi-generator-cli generate -i https://petstore3.swagger.io/api/v3/openapi.json \
           -g typescript-axios -o client \
           --additional-properties=supportsES6=true,withNodeImports=true,withInterfaces=true
+
+      - name: run tests based on generated api client
+        run: npm t
